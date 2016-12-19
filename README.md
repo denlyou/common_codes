@@ -34,7 +34,8 @@ flush privileges;
 - 시간 필드 기준으로 10분단위로 그룹
 
 ```sql
-(코드작성)
+SELECT *, MAX(`datetime`) as _dt  FROM fxrent_result WHERE 1 ".$interval."
+  					GROUP BY MONTH( datetime ) , DAYOFMONTH( datetime ) , HOUR( datetime ) , FLOOR( MINUTE( datetime ) /10 ) ORDER BY _dt DESC LIMIT {$from_record}, {$rows} ;
 ```
 
 - Replication (서버 복제)
