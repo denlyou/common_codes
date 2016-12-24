@@ -9,6 +9,7 @@
 - Laravel
 - GIT
 - Firebase
+- php
 
 ## MariaDB with SQL
 
@@ -58,6 +59,91 @@ SELECT *, MAX(`datetime`) as _dt  FROM fxrent_result WHERE 1 ".$interval."
 - 4web
 - 4ios
 
-
 ## git CLI
+
 - (git 콘솔 명령어)
+
+```git
+git init
+git remote -v
+```
+
+## php
+
+- header
+
+```php
+<?php
+// 캐릭터셋 UTF8
+header("Content-Type : text/html; charset=UTF-8");
+// 리다이렉트
+header('Location: http://www.example.com/');
+// response code 보내기
+header("HTTP/1.0 404 Not Found");
+// pdf파일로 example
+header("Content-type : application/pdf");
+header('Content-Disposition : attachment; filename="downloaded.pdf"');
+readfile('original.pdf');
+?>
+```
+
+- mysqli db connection
+
+```php
+<?php
+
+$mysqli = new mysqli("localhost", "SimpleFeedback", "SimpleFeedback", "SimpleFeedback");
+if ($mysqli->connect_errno) {
+    die("Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
+}
+$mysqli->query("SET NAMES utf8");
+
+?>
+```
+
+- session example
+
+```php
+<?php
+  // Get the private context
+  session_name('Private');
+  session_start();
+  $private_id = session_id();
+  $b = $_SESSION['pr_key'];
+  session_write_close();
+
+  // Get the global context
+  session_name('Global');
+  session_id('TEST');
+  session_start();
+
+  $a = $_SESSION['key'];
+  session_write_close();
+?>
+  <html>
+    <body>
+      <h1>Test 2: Global Count is: <?=++$a?></h1>
+      <h1>Test 2: Your Count is: <?=++$b?></h1>
+      <h1>Private ID is <?=$private_id?></h1>
+      <h1>Gloabl ID is <?=session_id()?></h1>
+      <pre>
+      <?php print_r($_SESSION); ?>
+      </pre>
+    </body>
+  </html>
+
+<?php
+  // Store it back
+  session_name('Private');
+  session_id($private_id);
+  session_start();
+  $_SESSION['pr_key'] = $b;
+  session_write_close();
+
+  session_name('Global');
+  session_id('TEST');
+  session_start();
+  $_SESSION['key']=$a;
+  session_write_close();
+?>
+```
