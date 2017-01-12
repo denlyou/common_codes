@@ -62,8 +62,12 @@ ORDER BY _dt DESC ;
 ## Node.js
 - (예정)
 
-## jQuery
-- ajax
+## jQuery + js
+- `$.post`, `$.get`은 IE8~9에서 안됨 ㅠㅠ
+- 또 IE9이하 forEach 미지원...
+- `$.ajax`
+- 시간관련 좋은 라이브러리
+  - momentjs (http://momentjs.com/)
 
 ### plug-in's
 
