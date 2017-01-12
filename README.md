@@ -45,8 +45,8 @@ flush privileges;
 - 시간 필드 기준으로 10분단위로 그룹
 
 ```sql
-SELECT *, MAX(`datetime`) as _dt
-  FROM fxrent_result
+SELECT *, MAX(`datetime`) as _alias
+  FROM 테이블명
  WHERE 1
 GROUP BY MONTH( datetime ) , DAYOFMONTH( datetime ) , HOUR( datetime ) , FLOOR( MINUTE( datetime ) /10 )
 ORDER BY _dt DESC ;
@@ -63,11 +63,24 @@ ORDER BY _dt DESC ;
 - (예정)
 
 ## jQuery + js
+- `$.ajax`
+
+```js
+$.ajax({ type: "POST", dataType: "json",
+  url: "/search_ajax_jobs.php",
+  data: { 'jobs': _jobs },
+  success: function(data){
+    // TODO
+  }
+});
+```
+** 보내는 쪽도 header가 확실히 json 타입이어야 함 **
+
 - `$.post`, `$.get`은 IE8~9에서 안됨 ㅠㅠ
 - 또 IE9이하 forEach 미지원...
-- `$.ajax`
 - 시간관련 좋은 라이브러리
   - momentjs (http://momentjs.com/)
+- ajax 크로스 도메인 ie8/9 문제 :  https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest
 
 ### plug-in's
 
